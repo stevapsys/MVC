@@ -1,5 +1,9 @@
 <?php
-require "Controller/formController.php";
+//inclui a função de autload que criamos 
+require "autoload.php";
+//use - nome da pasta - nome do arquivo. Para funcionar, o namespace tem que estar declarado
+use Controller\HomeController; 
+use Controller\FormController;
 
 //echo $_SERVER['REQUEST_URI']; die; 
 
@@ -14,16 +18,23 @@ require "Controller/formController.php";
 //echo "404 - NÃO ENCONTRADO";
 //}
 
-switch($_SERVER['REQUEST_URI']) {
-    case '/stephanie/mvc/formulario':
+//para colocar o caminho das pastas
+// $_SERVER['REQUEST_URI'] serve para colocar o caminho depois do localhost (raiz)
+//str_replace é para colocar as pastas que vem antes dá página que você quer acessar
+$path = str_replace('/stephanie/mvc', '', $_SERVER['REQUEST_URI']);
+
+//switch é para trocar por tudo que está na váriavel $path
+switch($path) {
+    case '/formulario':
         $obj = new FormController();
         $obj->form();
     break;
-    case "/stephanie/mvc/":
-        $obj = new FormController();
+    case "":
+    case "/":
+        $obj = new HomeController();
         $obj->home();
     break;
-    case "/stephanie/mvc/post":
+    case "/post":
         $obj = new FormController();
         $obj->post();
         break;

@@ -1,13 +1,12 @@
 <?php
+//para nomear o tipo de form que é esse. É o 'nome' dele
+namespace Controller;
 
-class FormController {
+
+class FormController extends Controller{
     function form() {
-        require('View/form.php');
+        $this->view('form');
     } 
-
-    function home() {
-        require('View/home.php');
-    }
 
     function post () {
         //SALVA DADOS NO JSON
